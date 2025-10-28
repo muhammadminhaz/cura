@@ -1,0 +1,1906 @@
+{
+  "Resources": {
+    "CuraVPC1E70C1E5": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "CuraVPC"
+          }
+        ]
+      }
+    },
+    "CuraVPCPublicSubnet1Subnet8938C2E9": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.0.0.0/18",
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public"
+          },
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PublicSubnet1"
+          }
+        ]
+      }
+    },
+    "CuraVPCPublicSubnet1RouteTableBDCE9973": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PublicSubnet1"
+          }
+        ]
+      }
+    },
+    "CuraVPCPublicSubnet1RouteTableAssociation304B30DF": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "CuraVPCPublicSubnet1RouteTableBDCE9973"
+        },
+        "SubnetId": {
+          "Ref": "CuraVPCPublicSubnet1Subnet8938C2E9"
+        }
+      }
+    },
+    "CuraVPCPublicSubnet1DefaultRouteD5948544": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "CuraVPCPublicSubnet1RouteTableBDCE9973"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "CuraVPCIGW1FF9297D"
+        }
+      },
+      "DependsOn": [
+        "CuraVPCVPCGWF231D9E6"
+      ]
+    },
+    "CuraVPCPublicSubnet1EIPE52381F7": {
+      "Type": "AWS::EC2::EIP",
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PublicSubnet1"
+          }
+        ]
+      }
+    },
+    "CuraVPCPublicSubnet1NATGateway028131A8": {
+      "Type": "AWS::EC2::NatGateway",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "CuraVPCPublicSubnet1Subnet8938C2E9"
+        },
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "CuraVPCPublicSubnet1EIPE52381F7",
+            "AllocationId"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PublicSubnet1"
+          }
+        ]
+      }
+    },
+    "CuraVPCPublicSubnet2Subnet154E77DD": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.0.64.0/18",
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public"
+          },
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PublicSubnet2"
+          }
+        ]
+      }
+    },
+    "CuraVPCPublicSubnet2RouteTableA3DB8A84": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PublicSubnet2"
+          }
+        ]
+      }
+    },
+    "CuraVPCPublicSubnet2RouteTableAssociation12B9BDAD": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "CuraVPCPublicSubnet2RouteTableA3DB8A84"
+        },
+        "SubnetId": {
+          "Ref": "CuraVPCPublicSubnet2Subnet154E77DD"
+        }
+      }
+    },
+    "CuraVPCPublicSubnet2DefaultRoute1AD2A58F": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "CuraVPCPublicSubnet2RouteTableA3DB8A84"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "CuraVPCIGW1FF9297D"
+        }
+      },
+      "DependsOn": [
+        "CuraVPCVPCGWF231D9E6"
+      ]
+    },
+    "CuraVPCPublicSubnet2EIP89D99EFE": {
+      "Type": "AWS::EC2::EIP",
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PublicSubnet2"
+          }
+        ]
+      }
+    },
+    "CuraVPCPublicSubnet2NATGatewayDAC9175C": {
+      "Type": "AWS::EC2::NatGateway",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "CuraVPCPublicSubnet2Subnet154E77DD"
+        },
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "CuraVPCPublicSubnet2EIP89D99EFE",
+            "AllocationId"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PublicSubnet2"
+          }
+        ]
+      }
+    },
+    "CuraVPCPrivateSubnet1SubnetB4D36878": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.0.128.0/18",
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private"
+          },
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PrivateSubnet1"
+          }
+        ]
+      }
+    },
+    "CuraVPCPrivateSubnet1RouteTable6C35A80D": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PrivateSubnet1"
+          }
+        ]
+      }
+    },
+    "CuraVPCPrivateSubnet1RouteTableAssociation09C01B44": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "CuraVPCPrivateSubnet1RouteTable6C35A80D"
+        },
+        "SubnetId": {
+          "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+        }
+      }
+    },
+    "CuraVPCPrivateSubnet1DefaultRoute81F862FA": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "CuraVPCPrivateSubnet1RouteTable6C35A80D"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "CuraVPCPublicSubnet1NATGateway028131A8"
+        }
+      }
+    },
+    "CuraVPCPrivateSubnet2SubnetA0285502": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.0.192.0/18",
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private"
+          },
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PrivateSubnet2"
+          }
+        ]
+      }
+    },
+    "CuraVPCPrivateSubnet2RouteTable400B0E24": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "localstack/CuraVPC/PrivateSubnet2"
+          }
+        ]
+      }
+    },
+    "CuraVPCPrivateSubnet2RouteTableAssociationC083A68A": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "CuraVPCPrivateSubnet2RouteTable400B0E24"
+        },
+        "SubnetId": {
+          "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+        }
+      }
+    },
+    "CuraVPCPrivateSubnet2DefaultRoute28DBC6AA": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "CuraVPCPrivateSubnet2RouteTable400B0E24"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "CuraVPCPublicSubnet2NATGatewayDAC9175C"
+        }
+      }
+    },
+    "CuraVPCIGW1FF9297D": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "CuraVPC"
+          }
+        ]
+      }
+    },
+    "CuraVPCVPCGWF231D9E6": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        },
+        "InternetGatewayId": {
+          "Ref": "CuraVPCIGW1FF9297D"
+        }
+      }
+    },
+    "AuthServiceDBSubnetGroupCFE5A552": {
+      "Type": "AWS::RDS::DBSubnetGroup",
+      "Properties": {
+        "DBSubnetGroupDescription": "Subnet group for AuthServiceDB database",
+        "SubnetIds": [
+          {
+            "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+          },
+          {
+            "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+          }
+        ]
+      }
+    },
+    "AuthServiceDBSecurityGroupBE6D28EB": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Security group for AuthServiceDB database",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      }
+    },
+    "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": {
+          "Fn::Join": [
+            "",
+            [
+              "Generated by the CDK for stack: ",
+              {
+                "Ref": "AWS::StackName"
+              }
+            ]
+          ]
+        },
+        "GenerateSecretString": {
+          "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+          "GenerateStringKey": "password",
+          "PasswordLength": 30,
+          "SecretStringTemplate": "{\"username\":\"admin\"}"
+        }
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "AuthServiceDBSecretAttachmentF30406A9": {
+      "Type": "AWS::SecretsManager::SecretTargetAttachment",
+      "Properties": {
+        "SecretId": {
+          "Ref": "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb"
+        },
+        "TargetId": {
+          "Ref": "AuthServiceDBC6B688BA"
+        },
+        "TargetType": "AWS::RDS::DBInstance"
+      }
+    },
+    "AuthServiceDBC6B688BA": {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBInstanceClass": "db.t2.medium",
+        "AllocatedStorage": "20",
+        "CopyTagsToSnapshot": true,
+        "DBName": "auth-service-db",
+        "DBSubnetGroupName": {
+          "Ref": "AuthServiceDBSubnetGroupCFE5A552"
+        },
+        "Engine": "postgres",
+        "EngineVersion": "14",
+        "MasterUsername": "admin",
+        "MasterUserPassword": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb"
+              },
+              ":SecretString:password::}}"
+            ]
+          ]
+        },
+        "StorageType": "gp2",
+        "VPCSecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "AuthServiceDBSecurityGroupBE6D28EB",
+              "GroupId"
+            ]
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "PatientServiceDBSubnetGroupCED49D16": {
+      "Type": "AWS::RDS::DBSubnetGroup",
+      "Properties": {
+        "DBSubnetGroupDescription": "Subnet group for PatientServiceDB database",
+        "SubnetIds": [
+          {
+            "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+          },
+          {
+            "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+          }
+        ]
+      }
+    },
+    "PatientServiceDBSecurityGroup6B97C0E5": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Security group for PatientServiceDB database",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      }
+    },
+    "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": {
+          "Fn::Join": [
+            "",
+            [
+              "Generated by the CDK for stack: ",
+              {
+                "Ref": "AWS::StackName"
+              }
+            ]
+          ]
+        },
+        "GenerateSecretString": {
+          "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+          "GenerateStringKey": "password",
+          "PasswordLength": 30,
+          "SecretStringTemplate": "{\"username\":\"admin\"}"
+        }
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "PatientServiceDBSecretAttachment90D77B03": {
+      "Type": "AWS::SecretsManager::SecretTargetAttachment",
+      "Properties": {
+        "SecretId": {
+          "Ref": "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb"
+        },
+        "TargetId": {
+          "Ref": "PatientServiceDBB84F9BF9"
+        },
+        "TargetType": "AWS::RDS::DBInstance"
+      }
+    },
+    "PatientServiceDBB84F9BF9": {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBInstanceClass": "db.t2.medium",
+        "AllocatedStorage": "20",
+        "CopyTagsToSnapshot": true,
+        "DBName": "patient-service-db",
+        "DBSubnetGroupName": {
+          "Ref": "PatientServiceDBSubnetGroupCED49D16"
+        },
+        "Engine": "postgres",
+        "EngineVersion": "14",
+        "MasterUsername": "admin",
+        "MasterUserPassword": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb"
+              },
+              ":SecretString:password::}}"
+            ]
+          ]
+        },
+        "StorageType": "gp2",
+        "VPCSecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "PatientServiceDBSecurityGroup6B97C0E5",
+              "GroupId"
+            ]
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "AuthDbHealthCheck": {
+      "Type": "AWS::Route53::HealthCheck",
+      "Properties": {
+        "HealthCheckConfig": {
+          "FailureThreshold": 3,
+          "IPAddress": {
+            "Fn::GetAtt": [
+              "AuthServiceDBC6B688BA",
+              "Endpoint.Address"
+            ]
+          },
+          "Port": -2147483648,
+          "RequestInterval": 30,
+          "Type": "TCP"
+        }
+      }
+    },
+    "PatientDbHealthCheck": {
+      "Type": "AWS::Route53::HealthCheck",
+      "Properties": {
+        "HealthCheckConfig": {
+          "FailureThreshold": 3,
+          "IPAddress": {
+            "Fn::GetAtt": [
+              "PatientServiceDBB84F9BF9",
+              "Endpoint.Address"
+            ]
+          },
+          "Port": -2147483648,
+          "RequestInterval": 30,
+          "Type": "TCP"
+        }
+      }
+    },
+    "MskCluster": {
+      "Type": "AWS::MSK::Cluster",
+      "Properties": {
+        "BrokerNodeGroupInfo": {
+          "BrokerAZDistribution": "DEFAULT",
+          "ClientSubnets": [
+            {
+              "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+            },
+            {
+              "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+            }
+          ],
+          "InstanceType": "kafka.m5.xlarge"
+        },
+        "ClusterName": "kafka-cluster",
+        "KafkaVersion": "2.8.0",
+        "NumberOfBrokerNodes": 1
+      }
+    },
+    "CuraClusterC50F3156": {
+      "Type": "AWS::ECS::Cluster"
+    },
+    "CuraClusterDefaultServiceDiscoveryNamespace56F0EEF2": {
+      "Type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+      "Properties": {
+        "Name": "cura.local",
+        "Vpc": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      }
+    },
+    "AuthServiceTaskDefinitionTaskRole59797C5A": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "AuthServiceTaskDefinition706F5A3B": {
+      "Type": "AWS::ECS::TaskDefinition",
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SPRING_SQL_INIT_MODE",
+                "Value": "never"
+              },
+              {
+                "Name": "SPRING_DATASOURCE_URL",
+                "Value": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "jdbc:postgresql://",
+                      {
+                        "Fn::GetAtt": [
+                          "AuthServiceDBC6B688BA",
+                          "Endpoint.Address"
+                        ]
+                      },
+                      ":",
+                      {
+                        "Fn::GetAtt": [
+                          "AuthServiceDBC6B688BA",
+                          "Endpoint.Port"
+                        ]
+                      },
+                      "/auth-service-db"
+                    ]
+                  ]
+                }
+              },
+              {
+                "Name": "SPRING_DATASOURCE_PASSWORD",
+                "Value": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "{{resolve:secretsmanager:",
+                      {
+                        "Ref": "AuthServiceDBSecretAttachmentF30406A9"
+                      },
+                      ":SecretString:password::}}"
+                    ]
+                  ]
+                }
+              },
+              {
+                "Name": "SPRING_JPA_HIBERNATE_DDL_AUTO",
+                "Value": "update"
+              },
+              {
+                "Name": "SPRING_DATASOURCE_HIKARI_INITIALIZATION_FAIL_TIMEOUT",
+                "Value": "6000"
+              },
+              {
+                "Name": "SPRING_DATASOURCE_USERNAME",
+                "Value": "admin"
+              },
+              {
+                "Name": "SPRING_KAFKA_BOOTSTRAP_SERVERS",
+                "Value": "localhost.localstack.cloud:4510, localhost.localstack.cloud:4511, localhost.localstack.cloud:4512"
+              }
+            ],
+            "Essential": true,
+            "Image": "auth-service",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "AuthServiceLogGroup34125B38"
+                },
+                "awslogs-stream-prefix": "auth-service",
+                "awslogs-region": {
+                  "Ref": "AWS::Region"
+                }
+              }
+            },
+            "Name": "auth-serviceContainer",
+            "PortMappings": [
+              {
+                "ContainerPort": 4005,
+                "HostPort": 4005,
+                "Protocol": "tcp"
+              }
+            ]
+          }
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "AuthServiceTaskDefinitionExecutionRoleAEDB468D",
+            "Arn"
+          ]
+        },
+        "Family": "localstackAuthServiceTaskDefinition5CC2D50A",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE"
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "AuthServiceTaskDefinitionTaskRole59797C5A",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "AuthServiceTaskDefinitionExecutionRoleAEDB468D": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "AuthServiceTaskDefinitionExecutionRoleDefaultPolicy611437E9": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "AuthServiceLogGroup34125B38",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "AuthServiceTaskDefinitionExecutionRoleDefaultPolicy611437E9",
+        "Roles": [
+          {
+            "Ref": "AuthServiceTaskDefinitionExecutionRoleAEDB468D"
+          }
+        ]
+      }
+    },
+    "AuthServiceLogGroup34125B38": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/ecs/auth-service",
+        "RetentionInDays": 1
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "AuthService3C2B741A": {
+      "Type": "AWS::ECS::Service",
+      "Properties": {
+        "Cluster": {
+          "Ref": "CuraClusterC50F3156"
+        },
+        "DeploymentConfiguration": {
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 50
+        },
+        "EnableECSManagedTags": false,
+        "LaunchType": "FARGATE",
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "AuthServiceSecurityGroup67F2FA7D",
+                  "GroupId"
+                ]
+              }
+            ],
+            "Subnets": [
+              {
+                "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+              },
+              {
+                "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+              }
+            ]
+          }
+        },
+        "ServiceName": "auth-service",
+        "TaskDefinition": {
+          "Ref": "AuthServiceTaskDefinition706F5A3B"
+        }
+      },
+      "DependsOn": [
+        "AuthDbHealthCheck",
+        "AuthServiceDBC6B688BA",
+        "AuthServiceDBSecretAttachmentF30406A9",
+        "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb",
+        "AuthServiceDBSecurityGroupBE6D28EB",
+        "AuthServiceDBSubnetGroupCFE5A552",
+        "MskCluster"
+      ]
+    },
+    "AuthServiceSecurityGroup67F2FA7D": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "localstack/AuthService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      },
+      "DependsOn": [
+        "AuthDbHealthCheck",
+        "AuthServiceDBC6B688BA",
+        "AuthServiceDBSecretAttachmentF30406A9",
+        "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb",
+        "AuthServiceDBSecurityGroupBE6D28EB",
+        "AuthServiceDBSubnetGroupCFE5A552",
+        "MskCluster"
+      ]
+    },
+    "BillingServiceTaskDefinitionTaskRoleF46A454F": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "BillingServiceTaskDefinition5DA3A2BF": {
+      "Type": "AWS::ECS::TaskDefinition",
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SPRING_KAFKA_BOOTSTRAP_SERVERS",
+                "Value": "localhost.localstack.cloud:4510, localhost.localstack.cloud:4511, localhost.localstack.cloud:4512"
+              }
+            ],
+            "Essential": true,
+            "Image": "billing-service",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "BillingServiceLogGroupDD61E740"
+                },
+                "awslogs-stream-prefix": "billing-service",
+                "awslogs-region": {
+                  "Ref": "AWS::Region"
+                }
+              }
+            },
+            "Name": "billing-serviceContainer",
+            "PortMappings": [
+              {
+                "ContainerPort": 4001,
+                "HostPort": 4001,
+                "Protocol": "tcp"
+              },
+              {
+                "ContainerPort": 9001,
+                "HostPort": 9001,
+                "Protocol": "tcp"
+              }
+            ]
+          }
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "BillingServiceTaskDefinitionExecutionRole7878C0D0",
+            "Arn"
+          ]
+        },
+        "Family": "localstackBillingServiceTaskDefinitionBBAE00F8",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE"
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "BillingServiceTaskDefinitionTaskRoleF46A454F",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "BillingServiceTaskDefinitionExecutionRole7878C0D0": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "BillingServiceTaskDefinitionExecutionRoleDefaultPolicy5B6C10D9": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BillingServiceLogGroupDD61E740",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "BillingServiceTaskDefinitionExecutionRoleDefaultPolicy5B6C10D9",
+        "Roles": [
+          {
+            "Ref": "BillingServiceTaskDefinitionExecutionRole7878C0D0"
+          }
+        ]
+      }
+    },
+    "BillingServiceLogGroupDD61E740": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/ecs/billing-service",
+        "RetentionInDays": 1
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "BillingServiceFEB36D90": {
+      "Type": "AWS::ECS::Service",
+      "Properties": {
+        "Cluster": {
+          "Ref": "CuraClusterC50F3156"
+        },
+        "DeploymentConfiguration": {
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 50
+        },
+        "EnableECSManagedTags": false,
+        "LaunchType": "FARGATE",
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "BillingServiceSecurityGroup3783AD35",
+                  "GroupId"
+                ]
+              }
+            ],
+            "Subnets": [
+              {
+                "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+              },
+              {
+                "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+              }
+            ]
+          }
+        },
+        "ServiceName": "billing-service",
+        "TaskDefinition": {
+          "Ref": "BillingServiceTaskDefinition5DA3A2BF"
+        }
+      }
+    },
+    "BillingServiceSecurityGroup3783AD35": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "localstack/BillingService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      }
+    },
+    "AnalyticsServiceTaskDefinitionTaskRoleFEFAABE2": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "AnalyticsServiceTaskDefinition9064F2D1": {
+      "Type": "AWS::ECS::TaskDefinition",
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SPRING_KAFKA_BOOTSTRAP_SERVERS",
+                "Value": "localhost.localstack.cloud:4510, localhost.localstack.cloud:4511, localhost.localstack.cloud:4512"
+              }
+            ],
+            "Essential": true,
+            "Image": "analytics-service",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "AnalyticsServiceLogGroupBD82F12A"
+                },
+                "awslogs-stream-prefix": "analytics-service",
+                "awslogs-region": {
+                  "Ref": "AWS::Region"
+                }
+              }
+            },
+            "Name": "analytics-serviceContainer",
+            "PortMappings": [
+              {
+                "ContainerPort": 4002,
+                "HostPort": 4002,
+                "Protocol": "tcp"
+              }
+            ]
+          }
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "AnalyticsServiceTaskDefinitionExecutionRoleBAACC4A9",
+            "Arn"
+          ]
+        },
+        "Family": "localstackAnalyticsServiceTaskDefinition085A9DA3",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE"
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "AnalyticsServiceTaskDefinitionTaskRoleFEFAABE2",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "AnalyticsServiceTaskDefinitionExecutionRoleBAACC4A9": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "AnalyticsServiceTaskDefinitionExecutionRoleDefaultPolicy495819A7": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "AnalyticsServiceLogGroupBD82F12A",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "AnalyticsServiceTaskDefinitionExecutionRoleDefaultPolicy495819A7",
+        "Roles": [
+          {
+            "Ref": "AnalyticsServiceTaskDefinitionExecutionRoleBAACC4A9"
+          }
+        ]
+      }
+    },
+    "AnalyticsServiceLogGroupBD82F12A": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/ecs/analytics-service",
+        "RetentionInDays": 1
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "AnalyticsServiceCD38C492": {
+      "Type": "AWS::ECS::Service",
+      "Properties": {
+        "Cluster": {
+          "Ref": "CuraClusterC50F3156"
+        },
+        "DeploymentConfiguration": {
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 50
+        },
+        "EnableECSManagedTags": false,
+        "LaunchType": "FARGATE",
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "AnalyticsServiceSecurityGroupBA6AE98A",
+                  "GroupId"
+                ]
+              }
+            ],
+            "Subnets": [
+              {
+                "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+              },
+              {
+                "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+              }
+            ]
+          }
+        },
+        "ServiceName": "analytics-service",
+        "TaskDefinition": {
+          "Ref": "AnalyticsServiceTaskDefinition9064F2D1"
+        }
+      }
+    },
+    "AnalyticsServiceSecurityGroupBA6AE98A": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "localstack/AnalyticsService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      }
+    },
+    "PatientServiceTaskDefinitionTaskRole3A528A37": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "PatientServiceTaskDefinitionC5372FAF": {
+      "Type": "AWS::ECS::TaskDefinition",
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SPRING_SQL_INIT_MODE",
+                "Value": "never"
+              },
+              {
+                "Name": "SPRING_DATASOURCE_URL",
+                "Value": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "jdbc:postgresql://",
+                      {
+                        "Fn::GetAtt": [
+                          "PatientServiceDBB84F9BF9",
+                          "Endpoint.Address"
+                        ]
+                      },
+                      ":",
+                      {
+                        "Fn::GetAtt": [
+                          "PatientServiceDBB84F9BF9",
+                          "Endpoint.Port"
+                        ]
+                      },
+                      "/patient-service-db"
+                    ]
+                  ]
+                }
+              },
+              {
+                "Name": "SPRING_DATASOURCE_PASSWORD",
+                "Value": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "{{resolve:secretsmanager:",
+                      {
+                        "Ref": "PatientServiceDBSecretAttachment90D77B03"
+                      },
+                      ":SecretString:password::}}"
+                    ]
+                  ]
+                }
+              },
+              {
+                "Name": "SPRING_JPA_HIBERNATE_DDL_AUTO",
+                "Value": "update"
+              },
+              {
+                "Name": "SPRING_DATASOURCE_HIKARI_INITIALIZATION_FAIL_TIMEOUT",
+                "Value": "6000"
+              },
+              {
+                "Name": "SPRING_DATASOURCE_USERNAME",
+                "Value": "admin"
+              },
+              {
+                "Name": "SPRING_KAFKA_BOOTSTRAP_SERVERS",
+                "Value": "localhost.localstack.cloud:4510, localhost.localstack.cloud:4511, localhost.localstack.cloud:4512"
+              }
+            ],
+            "Essential": true,
+            "Image": "patient-service",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "PatientServiceLogGroup4A5C3809"
+                },
+                "awslogs-stream-prefix": "patient-service",
+                "awslogs-region": {
+                  "Ref": "AWS::Region"
+                }
+              }
+            },
+            "Name": "patient-serviceContainer",
+            "PortMappings": [
+              {
+                "ContainerPort": 4000,
+                "HostPort": 4000,
+                "Protocol": "tcp"
+              }
+            ]
+          }
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "PatientServiceTaskDefinitionExecutionRole45319D4C",
+            "Arn"
+          ]
+        },
+        "Family": "localstackPatientServiceTaskDefinitionE5887C28",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE"
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "PatientServiceTaskDefinitionTaskRole3A528A37",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "PatientServiceTaskDefinitionExecutionRole45319D4C": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "PatientServiceTaskDefinitionExecutionRoleDefaultPolicy76561BB6": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PatientServiceLogGroup4A5C3809",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PatientServiceTaskDefinitionExecutionRoleDefaultPolicy76561BB6",
+        "Roles": [
+          {
+            "Ref": "PatientServiceTaskDefinitionExecutionRole45319D4C"
+          }
+        ]
+      }
+    },
+    "PatientServiceLogGroup4A5C3809": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/ecs/patient-service",
+        "RetentionInDays": 1
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "PatientServiceA65AB800": {
+      "Type": "AWS::ECS::Service",
+      "Properties": {
+        "Cluster": {
+          "Ref": "CuraClusterC50F3156"
+        },
+        "DeploymentConfiguration": {
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 50
+        },
+        "EnableECSManagedTags": false,
+        "LaunchType": "FARGATE",
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "PatientServiceSecurityGroup547BE1F2",
+                  "GroupId"
+                ]
+              }
+            ],
+            "Subnets": [
+              {
+                "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+              },
+              {
+                "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+              }
+            ]
+          }
+        },
+        "ServiceName": "patient-service",
+        "TaskDefinition": {
+          "Ref": "PatientServiceTaskDefinitionC5372FAF"
+        }
+      },
+      "DependsOn": [
+        "BillingServiceSecurityGroup3783AD35",
+        "BillingServiceFEB36D90",
+        "MskCluster",
+        "PatientDbHealthCheck",
+        "PatientServiceDBB84F9BF9",
+        "PatientServiceDBSecretAttachment90D77B03",
+        "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb",
+        "PatientServiceDBSecurityGroup6B97C0E5",
+        "PatientServiceDBSubnetGroupCED49D16"
+      ]
+    },
+    "PatientServiceSecurityGroup547BE1F2": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "localstack/PatientService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      },
+      "DependsOn": [
+        "BillingServiceSecurityGroup3783AD35",
+        "BillingServiceFEB36D90",
+        "MskCluster",
+        "PatientDbHealthCheck",
+        "PatientServiceDBB84F9BF9",
+        "PatientServiceDBSecretAttachment90D77B03",
+        "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb",
+        "PatientServiceDBSecurityGroup6B97C0E5",
+        "PatientServiceDBSubnetGroupCED49D16"
+      ]
+    },
+    "ApiGatewayTaskDefinitionTaskRole78FC06E2": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "ApiGatewayTaskDefinitionBB9A2505": {
+      "Type": "AWS::ECS::TaskDefinition",
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SPRING_PROFILES_ACTIVE",
+                "Value": "prod"
+              },
+              {
+                "Name": "AUTH_SERVICE_URL",
+                "Value": "http://host.docker.internal:4005"
+              }
+            ],
+            "Essential": true,
+            "Image": "api-gateway",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "ApiGatewayLogGroupA9770429"
+                },
+                "awslogs-stream-prefix": "api-gateway",
+                "awslogs-region": {
+                  "Ref": "AWS::Region"
+                }
+              }
+            },
+            "Name": "ApiGatewayContainer",
+            "PortMappings": [
+              {
+                "ContainerPort": 4004,
+                "HostPort": 4004,
+                "Protocol": "tcp"
+              }
+            ]
+          }
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "ApiGatewayTaskDefinitionExecutionRoleE78CB745",
+            "Arn"
+          ]
+        },
+        "Family": "localstackApiGatewayTaskDefinition2CA71C36",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE"
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "ApiGatewayTaskDefinitionTaskRole78FC06E2",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "ApiGatewayTaskDefinitionExecutionRoleE78CB745": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "ApiGatewayTaskDefinitionExecutionRoleDefaultPolicy3FBBB1F9": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "ApiGatewayLogGroupA9770429",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ApiGatewayTaskDefinitionExecutionRoleDefaultPolicy3FBBB1F9",
+        "Roles": [
+          {
+            "Ref": "ApiGatewayTaskDefinitionExecutionRoleE78CB745"
+          }
+        ]
+      }
+    },
+    "ApiGatewayLogGroupA9770429": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/ecs/api-gateway",
+        "RetentionInDays": 1
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "ApiGatewayServiceLB661D42EC": {
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "false"
+          }
+        ],
+        "Scheme": "internet-facing",
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "ApiGatewayServiceLBSecurityGroup0E508841",
+              "GroupId"
+            ]
+          }
+        ],
+        "Subnets": [
+          {
+            "Ref": "CuraVPCPublicSubnet1Subnet8938C2E9"
+          },
+          {
+            "Ref": "CuraVPCPublicSubnet2Subnet154E77DD"
+          }
+        ],
+        "Type": "application"
+      },
+      "DependsOn": [
+        "CuraVPCPublicSubnet1DefaultRouteD5948544",
+        "CuraVPCPublicSubnet2DefaultRoute1AD2A58F"
+      ]
+    },
+    "ApiGatewayServiceLBSecurityGroup0E508841": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Automatically created Security Group for ELB localstackApiGatewayServiceLBD935C10B",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow from anyone on port 80",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80
+          }
+        ],
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      }
+    },
+    "ApiGatewayServiceLBSecurityGrouptolocalstackApiGatewayServiceSecurityGroup47EA876B40040666B611": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": {
+          "Fn::GetAtt": [
+            "ApiGatewayServiceLBSecurityGroup0E508841",
+            "GroupId"
+          ]
+        },
+        "IpProtocol": "tcp",
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "ApiGatewayServiceSecurityGroup867C9DB1",
+            "GroupId"
+          ]
+        },
+        "FromPort": 4004,
+        "ToPort": 4004
+      }
+    },
+    "ApiGatewayServiceLBPublicListenerA86B9BC4": {
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+      "Properties": {
+        "DefaultActions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "ApiGatewayServiceLBPublicListenerECSGroup0BFE5495"
+            },
+            "Type": "forward"
+          }
+        ],
+        "LoadBalancerArn": {
+          "Ref": "ApiGatewayServiceLB661D42EC"
+        },
+        "Port": 80,
+        "Protocol": "HTTP"
+      }
+    },
+    "ApiGatewayServiceLBPublicListenerECSGroup0BFE5495": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "TargetType": "ip",
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      }
+    },
+    "ApiGatewayService4908847F": {
+      "Type": "AWS::ECS::Service",
+      "Properties": {
+        "Cluster": {
+          "Ref": "CuraClusterC50F3156"
+        },
+        "DeploymentConfiguration": {
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 50
+        },
+        "DesiredCount": 1,
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "ApiGatewayContainer",
+            "ContainerPort": 4004,
+            "TargetGroupArn": {
+              "Ref": "ApiGatewayServiceLBPublicListenerECSGroup0BFE5495"
+            }
+          }
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "ApiGatewayServiceSecurityGroup867C9DB1",
+                  "GroupId"
+                ]
+              }
+            ],
+            "Subnets": [
+              {
+                "Ref": "CuraVPCPrivateSubnet1SubnetB4D36878"
+              },
+              {
+                "Ref": "CuraVPCPrivateSubnet2SubnetA0285502"
+              }
+            ]
+          }
+        },
+        "ServiceName": "api-gateway",
+        "TaskDefinition": {
+          "Ref": "ApiGatewayTaskDefinitionBB9A2505"
+        }
+      },
+      "DependsOn": [
+        "ApiGatewayServiceLBPublicListenerECSGroup0BFE5495",
+        "ApiGatewayServiceLBPublicListenerA86B9BC4"
+      ]
+    },
+    "ApiGatewayServiceSecurityGroup867C9DB1": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "localstack/ApiGatewayService/Service/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "CuraVPC1E70C1E5"
+        }
+      }
+    },
+    "ApiGatewayServiceSecurityGroupfromlocalstackApiGatewayServiceLBSecurityGroup008100C94004D3A7817C": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "Description": "Load balancer to target",
+        "FromPort": 4004,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "ApiGatewayServiceSecurityGroup867C9DB1",
+            "GroupId"
+          ]
+        },
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "ApiGatewayServiceLBSecurityGroup0E508841",
+            "GroupId"
+          ]
+        },
+        "ToPort": 4004
+      }
+    }
+  },
+  "Outputs": {
+    "ApiGatewayServiceLoadBalancerDNS40D66446": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ApiGatewayServiceLB661D42EC",
+          "DNSName"
+        ]
+      }
+    },
+    "ApiGatewayServiceServiceURL8E0540A6": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "ApiGatewayServiceLB661D42EC",
+                "DNSName"
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

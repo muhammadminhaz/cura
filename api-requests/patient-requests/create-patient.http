@@ -1,0 +1,11 @@
+POST http://localhost:4000/patients
+Content-Type: application/json
+
+{
+  "name": "Minhaz",
+  "email": "zcxasxs@gmailz.com",
+  "address": "Khilgaon",
+  "gender": "Male",
+  "birthDate": "1997-07-21",
+  "registrationDate": "2024-01-01"
+}

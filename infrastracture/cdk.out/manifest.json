@@ -1,0 +1,510 @@
+{
+  "version": "16.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "localstack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "localstack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}"
+      },
+      "metadata": {
+        "/localstack/CuraVPC/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPC1E70C1E5"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet1Subnet8938C2E9"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet1RouteTableBDCE9973"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet1RouteTableAssociation304B30DF"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet1DefaultRouteD5948544"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet1EIPE52381F7"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet1NATGateway028131A8"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet2Subnet154E77DD"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet2RouteTableA3DB8A84"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet2RouteTableAssociation12B9BDAD"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet2DefaultRoute1AD2A58F"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet2EIP89D99EFE"
+          }
+        ],
+        "/localstack/CuraVPC/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPublicSubnet2NATGatewayDAC9175C"
+          }
+        ],
+        "/localstack/CuraVPC/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPrivateSubnet1SubnetB4D36878"
+          }
+        ],
+        "/localstack/CuraVPC/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPrivateSubnet1RouteTable6C35A80D"
+          }
+        ],
+        "/localstack/CuraVPC/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPrivateSubnet1RouteTableAssociation09C01B44"
+          }
+        ],
+        "/localstack/CuraVPC/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPrivateSubnet1DefaultRoute81F862FA"
+          }
+        ],
+        "/localstack/CuraVPC/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPrivateSubnet2SubnetA0285502"
+          }
+        ],
+        "/localstack/CuraVPC/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPrivateSubnet2RouteTable400B0E24"
+          }
+        ],
+        "/localstack/CuraVPC/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPrivateSubnet2RouteTableAssociationC083A68A"
+          }
+        ],
+        "/localstack/CuraVPC/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCPrivateSubnet2DefaultRoute28DBC6AA"
+          }
+        ],
+        "/localstack/CuraVPC/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCIGW1FF9297D"
+          }
+        ],
+        "/localstack/CuraVPC/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraVPCVPCGWF231D9E6"
+          }
+        ],
+        "/localstack/AuthServiceDB/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBSubnetGroupCFE5A552"
+          }
+        ],
+        "/localstack/AuthServiceDB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBSecurityGroupBE6D28EB"
+          }
+        ],
+        "/localstack/AuthServiceDB/Secret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb"
+          }
+        ],
+        "/localstack/AuthServiceDB/Secret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBSecretAttachmentF30406A9"
+          }
+        ],
+        "/localstack/AuthServiceDB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBC6B688BA"
+          }
+        ],
+        "/localstack/PatientServiceDB/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBSubnetGroupCED49D16"
+          }
+        ],
+        "/localstack/PatientServiceDB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBSecurityGroup6B97C0E5"
+          }
+        ],
+        "/localstack/PatientServiceDB/Secret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb"
+          }
+        ],
+        "/localstack/PatientServiceDB/Secret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBSecretAttachment90D77B03"
+          }
+        ],
+        "/localstack/PatientServiceDB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBB84F9BF9"
+          }
+        ],
+        "/localstack/AuthDbHealthCheck": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthDbHealthCheck"
+          }
+        ],
+        "/localstack/PatientDbHealthCheck": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientDbHealthCheck"
+          }
+        ],
+        "/localstack/MskCluster": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MskCluster"
+          }
+        ],
+        "/localstack/CuraCluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraClusterC50F3156"
+          }
+        ],
+        "/localstack/CuraCluster/DefaultServiceDiscoveryNamespace/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CuraClusterDefaultServiceDiscoveryNamespace56F0EEF2"
+          }
+        ],
+        "/localstack/AuthServiceTaskDefinition/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceTaskDefinitionTaskRole59797C5A"
+          }
+        ],
+        "/localstack/AuthServiceTaskDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceTaskDefinition706F5A3B"
+          }
+        ],
+        "/localstack/AuthServiceTaskDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceTaskDefinitionExecutionRoleAEDB468D"
+          }
+        ],
+        "/localstack/AuthServiceTaskDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceTaskDefinitionExecutionRoleDefaultPolicy611437E9"
+          }
+        ],
+        "/localstack/AuthServiceLogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceLogGroup34125B38"
+          }
+        ],
+        "/localstack/AuthService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthService3C2B741A"
+          }
+        ],
+        "/localstack/AuthService/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceSecurityGroup67F2FA7D"
+          }
+        ],
+        "/localstack/BillingServiceTaskDefinition/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BillingServiceTaskDefinitionTaskRoleF46A454F"
+          }
+        ],
+        "/localstack/BillingServiceTaskDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BillingServiceTaskDefinition5DA3A2BF"
+          }
+        ],
+        "/localstack/BillingServiceTaskDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BillingServiceTaskDefinitionExecutionRole7878C0D0"
+          }
+        ],
+        "/localstack/BillingServiceTaskDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BillingServiceTaskDefinitionExecutionRoleDefaultPolicy5B6C10D9"
+          }
+        ],
+        "/localstack/BillingServiceLogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BillingServiceLogGroupDD61E740"
+          }
+        ],
+        "/localstack/BillingService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BillingServiceFEB36D90"
+          }
+        ],
+        "/localstack/BillingService/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BillingServiceSecurityGroup3783AD35"
+          }
+        ],
+        "/localstack/AnalyticsServiceTaskDefinition/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsServiceTaskDefinitionTaskRoleFEFAABE2"
+          }
+        ],
+        "/localstack/AnalyticsServiceTaskDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsServiceTaskDefinition9064F2D1"
+          }
+        ],
+        "/localstack/AnalyticsServiceTaskDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsServiceTaskDefinitionExecutionRoleBAACC4A9"
+          }
+        ],
+        "/localstack/AnalyticsServiceTaskDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsServiceTaskDefinitionExecutionRoleDefaultPolicy495819A7"
+          }
+        ],
+        "/localstack/AnalyticsServiceLogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsServiceLogGroupBD82F12A"
+          }
+        ],
+        "/localstack/AnalyticsService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsServiceCD38C492"
+          }
+        ],
+        "/localstack/AnalyticsService/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsServiceSecurityGroupBA6AE98A"
+          }
+        ],
+        "/localstack/PatientServiceTaskDefinition/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceTaskDefinitionTaskRole3A528A37"
+          }
+        ],
+        "/localstack/PatientServiceTaskDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceTaskDefinitionC5372FAF"
+          }
+        ],
+        "/localstack/PatientServiceTaskDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceTaskDefinitionExecutionRole45319D4C"
+          }
+        ],
+        "/localstack/PatientServiceTaskDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceTaskDefinitionExecutionRoleDefaultPolicy76561BB6"
+          }
+        ],
+        "/localstack/PatientServiceLogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceLogGroup4A5C3809"
+          }
+        ],
+        "/localstack/PatientService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceA65AB800"
+          }
+        ],
+        "/localstack/PatientService/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceSecurityGroup547BE1F2"
+          }
+        ],
+        "/localstack/ApiGatewayTaskDefinition/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayTaskDefinitionTaskRole78FC06E2"
+          }
+        ],
+        "/localstack/ApiGatewayTaskDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayTaskDefinitionBB9A2505"
+          }
+        ],
+        "/localstack/ApiGatewayTaskDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayTaskDefinitionExecutionRoleE78CB745"
+          }
+        ],
+        "/localstack/ApiGatewayTaskDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayTaskDefinitionExecutionRoleDefaultPolicy3FBBB1F9"
+          }
+        ],
+        "/localstack/ApiGatewayLogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayLogGroupA9770429"
+          }
+        ],
+        "/localstack/ApiGatewayService/LB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceLB661D42EC"
+          }
+        ],
+        "/localstack/ApiGatewayService/LB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceLBSecurityGroup0E508841"
+          }
+        ],
+        "/localstack/ApiGatewayService/LB/SecurityGroup/to localstackApiGatewayServiceSecurityGroup47EA876B:4004": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceLBSecurityGrouptolocalstackApiGatewayServiceSecurityGroup47EA876B40040666B611"
+          }
+        ],
+        "/localstack/ApiGatewayService/LB/PublicListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceLBPublicListenerA86B9BC4"
+          }
+        ],
+        "/localstack/ApiGatewayService/LB/PublicListener/ECSGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceLBPublicListenerECSGroup0BFE5495"
+          }
+        ],
+        "/localstack/ApiGatewayService/LoadBalancerDNS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceLoadBalancerDNS40D66446"
+          }
+        ],
+        "/localstack/ApiGatewayService/ServiceURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceServiceURL8E0540A6"
+          }
+        ],
+        "/localstack/ApiGatewayService/Service/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayService4908847F"
+          }
+        ],
+        "/localstack/ApiGatewayService/Service/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceSecurityGroup867C9DB1"
+          }
+        ],
+        "/localstack/ApiGatewayService/Service/SecurityGroup/from localstackApiGatewayServiceLBSecurityGroup008100C9:4004": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayServiceSecurityGroupfromlocalstackApiGatewayServiceLBSecurityGroup008100C94004D3A7817C"
+          }
+        ]
+      },
+      "displayName": "localstack"
+    }
+  }
+}
