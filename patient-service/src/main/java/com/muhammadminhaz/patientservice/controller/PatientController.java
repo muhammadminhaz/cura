@@ -1,5 +1,6 @@
 package com.muhammadminhaz.patientservice.controller;
 
+import com.muhammadminhaz.patientservice.dto.PaginatedPatientResponseDTO;
 import com.muhammadminhaz.patientservice.dto.PatientRequestDTO;
 import com.muhammadminhaz.patientservice.dto.PatientResponseDTO;
 import com.muhammadminhaz.patientservice.dto.validators.CreatePatientValidationGroup;
@@ -34,10 +35,22 @@ public class PatientController {
 
     @GetMapping
     @Operation(summary = "Get all patients")
-    public ResponseEntity<List<PatientResponseDTO>> getAllPatients() {
+    public ResponseEntity<PaginatedPatientResponseDTO> getAllPatients(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "asc") String sort,
+            @RequestParam(defaultValue = "name") String sortBy,
+            @RequestParam(defaultValue = "") String searchValue
+    ) {
         try {
-            List<PatientResponseDTO> patients = patientService.getPatients();
-            if (patients.isEmpty()) {
+            PaginatedPatientResponseDTO patients = patientService.getPatients(
+                    page,
+                    size,
+                    sort,
+                    sortBy,
+                    searchValue
+            );
+            if (patients.getPatients().isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
             log.info("test");

@@ -9,7 +9,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Run stage
-FROM openjdk:25-jdk-slim AS runner
+FROM amazoncorretto:25-alpine AS runner
 WORKDIR /app
 
 # Copy the jar from the builder stage
