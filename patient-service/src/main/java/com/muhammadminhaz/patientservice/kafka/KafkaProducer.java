@@ -22,13 +22,27 @@ public class KafkaProducer {
                 .setPatientId(patient.getId().toString())
                 .setEmail(patient.getEmail())
                 .setName(patient.getName())
-                .setEventType("PATIENT_EVENT_CREATED")
                 .build();
         try {
             logger.info(">>> Sending patient event to Kafka: {}" + patientEvent);
-            kafkaTemplate.send("patient", patientEvent.toByteArray());
+            kafkaTemplate.send("patient.created", patientEvent.toByteArray());
         } catch (Exception e) {
-            logger.info("Error sending PATIENT_EVENT_CREATED: {}" + e.getMessage());
+            logger.info("Error sending Patient Create Event: {}" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void sendPatientUpdateEvent(Patient patient) {
+        PatientEvent patientEvent = PatientEvent.newBuilder()
+                .setPatientId(patient.getId().toString())
+                .setEmail(patient.getEmail())
+                .setName(patient.getName())
+                .build();
+        try {
+            logger.info(">>> Sending patient event to Kafka: {}" + patientEvent);
+            kafkaTemplate.send("patient.updated", patientEvent.toByteArray());
+        } catch (Exception e) {
+            logger.info("Error sending Patient Update Event: {}" + e.getMessage());
             throw new RuntimeException(e);
         }
     }

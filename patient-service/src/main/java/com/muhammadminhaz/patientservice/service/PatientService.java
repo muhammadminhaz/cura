@@ -90,7 +90,9 @@ public class PatientService {
         patient.setGender(patientRequestDTO.getGender());
         patient.setAddress(patientRequestDTO.getAddress());
         patient.setBirthDate(LocalDate.parse(patientRequestDTO.getBirthDate()));
-        return PatientMapper.toDTO(patientRepository.save(patient));
+        Patient updatedPatient = patientRepository.save(patient);
+        kafkaProducer.sendPatientUpdateEvent(updatedPatient);
+        return PatientMapper.toDTO(updatedPatient);
     }
 
     public void deletePatient(UUID id) {
