@@ -12,6 +12,7 @@ import software.amazon.awscdk.services.logs.RetentionDays;
 import software.amazon.awscdk.services.msk.CfnCluster;
 import software.amazon.awscdk.services.rds.*;
 import software.amazon.awscdk.services.route53.CfnHealthCheck;
+import software.amazon.awscdk.services.servicediscovery.DnsRecordType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class LocalStack extends Stack {
                 "patient-service",
                 List.of(4000),
                 patientServiceDb,
-                Map.of("BILLING_SERVICE_ADDRESS", "host.docker.internal",
+                Map.of("BILLING_SERVICE_ADDRESS", "billing-service.cura.local",
                 "BILLING_SERVICE_GRPC_PORT", "9001"
                 ));
 
@@ -204,6 +205,10 @@ public class LocalStack extends Stack {
                 .cluster(ecsCluster)
                 .taskDefinition(fargateTaskDefinition)
                 .assignPublicIp(false)
+                .cloudMapOptions(CloudMapOptions.builder()
+                        .name(imageName)
+                        .dnsRecordType(DnsRecordType.A)
+                        .build())
                 .serviceName(imageName)
                 .build();
     }
@@ -220,7 +225,7 @@ public class LocalStack extends Stack {
                         .image(ContainerImage.fromRegistry("api-gateway"))
                         .environment(Map.of(
                                 "SPRING_PROFILES_ACTIVE", "prod",
-                                "AUTH_SERVICE_URL", "http://host.docker.internal:4005"
+                                "AUTH_SERVICE_URL", "http://auth-service.cura.local:4005"
                         ))
                         .portMappings(List.of(4004).stream()
                                 .map(port -> PortMapping.builder()
@@ -248,7 +253,12 @@ public class LocalStack extends Stack {
                         .serviceName("api-gateway")
                         .taskDefinition(taskDefinition)
                         .desiredCount(1)
+                        .publicLoadBalancer(true)
                         .healthCheckGracePeriod(Duration.seconds(60))
+                        .cloudMapOptions(CloudMapOptions.builder()
+                                .name("api-gateway")
+                                .dnsRecordType(DnsRecordType.A)
+                                .build())
                         .build();
     }
 
