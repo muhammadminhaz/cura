@@ -43,7 +43,6 @@ public class PatientService {
             condition = "#searchValue == ''"
     )
     public PaginatedPatientResponseDTO getPatients(int page, int size, String sort, String sortBy, String searchValue) {
-        log.info("[REDIS]: Cache miss - fetching from db");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
