@@ -1,0 +1,7 @@
+### Get Appointments By Date Range
+GET http://localhost:4006/appointments?from=2020-01-01T00:00:00&to=2025-01-01T00:22:22
+Content-Type: application/json
+
+
+
+###
