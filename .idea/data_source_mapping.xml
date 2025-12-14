@@ -2,6 +2,7 @@
 <project version="4">
   <component name="DataSourcePerFileMappings">
     <file url="file://$PROJECT_DIR$/.idea/queries/Query.sql" value="aa2af45e-ca7f-4042-a11c-240e9e7472b8" />
+    <file url="file://$PROJECT_DIR$/.idea/queries/Query_1.sql" value="e41fc7f5-78bd-4d78-bd67-19bbcb4f4482" />
     <file url="file://$PROJECT_DIR$/patient-service/src/main/resources/data.sql" value="8d51be22-f75f-4bc9-b6b7-10dc340cb086" />
   </component>
 </project>
